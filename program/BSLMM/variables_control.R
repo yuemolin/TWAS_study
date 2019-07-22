@@ -24,5 +24,9 @@ for (gene in colnames(regre_mat[1:32955]))
 {
 	mod = lm(get(gene)~ age + gender + pc1 + pc2 + pc3 + pc4 + pc5, data = regre_mat)
 	rs[,gene] <-residuals(mod)
+
 }
+row.names(rs) <- rs[,1]
+rs<-rs[,-1]
+write.table(rs,file = "/home/skardia_lab/clubhouse/research/projects/GENOA_AA_omics_mediation_analyses/Gene_expression/Data/BSLMM_Pheno_after_control.txt",sep=' ',row.names=F,col.names=F,quote=F)
 save(rs,file = "/home/skardia_lab/clubhouse/research/projects/GENOA_AA_omics_mediation_analyses/Gene_expression/Data/residuals_after_var_control.Rdata")
